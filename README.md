@@ -1,3 +1,5 @@
+[![Run sample app](https://github.com/everoddandeven/xmr-sample-python/actions/workflows/run-sample.yml/badge.svg)](https://github.com/everoddandeven/xmr-sample-python/actions/workflows/run-sample.yml)
+
 # Description
 
 This project is a sample Python app using [monero-python](https://github.com/everoddandeven/monero-python).
