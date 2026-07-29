@@ -1,0 +1,35 @@
+name: Run sample app
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  MONERO_PYTHON_VERSION: v0.9.1
+  MONERO_PYTHON_DEB: python3-monero_0.9.1-1noble1_amd64.deb
+
+jobs:
+  run-sample:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout xmr-sample-python
+        uses: actions/checkout@v4
+
+      - name: Download monero-python .deb package
+        run: |
+          set -euo pipefail
+          asset_url="https://github.com/everoddandeven/monero-python/releases/download/${MONERO_PYTHON_VERSION}/${MONERO_PYTHON_DEB}"
+          echo "Downloading $asset_url"
+          curl -fsSL -o monero-python.deb "$asset_url"
+
+      - name: Install monero-python .deb package
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ./monero-python.deb
+
+      - name: Run sample app
+        run: python3 src/main.py
